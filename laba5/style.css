@@ -1,0 +1,75 @@
+
+body {
+    background-color:rgb(240,230,255); 
+}
+
+.container {
+    width: 1440px; 
+    margin: 0 auto; 
+}
+
+ul {
+    list-style-type: none; 
+}
+
+ul li a {
+    color: black;
+    text-decoration: none;
+}
+
+.centered {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.justify {
+    text-align: justify;
+}
+
+img{
+    width:400px;
+    height:400px;
+    border-radius: 15px; 
+}
+
+.bold{
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'фильм_1';
+    src: url('fonts/фильм_1.ttf') format('truetype');
+}
+
+#фильм_1 h1,
+#фильм_1 h2,
+#фильм_1 h3,
+#фильм_1 p,
+#фильм_1 table {
+    font-family: 'фильм_1'; 
+}
+
+
+@font-face {
+    font-family: 'фильм_2';
+    src: url('fonts/фильм_2.ttf') format('truetype');
+}
+
+#фильм_2 {    
+    font-family: 'фильм_2'; 
+}
+
+@font-face {
+    font-family: 'фильм_3';
+    src: url('fonts/фильм_3.ttf') format('truetype');
+}
+
+#фильм_3 h1,
+#фильм_3 h2,
+#фильм_3 h3,
+#фильм_3 p,
+#фильм_3 table {
+    font-family: 'фильм_3'; 
+}
