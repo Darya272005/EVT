@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrimeRent | О компании</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;       /* Яркий синий */
+      --primary-light: #4895ef; /* Светло-синий */
+      --primary-dark: #3a0ca3;  /* Темно-синий */
+      --secondary: #f72585;     /* Ярко-розовый */
+      --success: #4cc9f0;      /* Голубой */
+      --success-dark: #38b6db;
+      --text: #2b2d42;         /* Темно-синий текст */
+      --text-light: #8d99ae;
+      --bg: #f8f9fa;           /* Светлый фон */
+      --card-bg: #ffffff;
+      --border: #e9ecef;
+      --shadow: 0 4px 20px rgba(67, 97, 238, 0.15);
+      --radius: 14px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --header-height: 80px;
+    }
+
+    .dark {
+      --primary: #4895ef;
+      --primary-light: #4361ee;
+      --primary-dark: #3a0ca3;
+      --text: #f8f9fa;
+      --text-light: #adb5bd;
+      --bg: #212529;
+      --card-bg: #343a40;
+      --border: #495057;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+
+    p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100;
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .dark header {
+      background: rgba(33, 37, 41, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo i {
+      font-size: 1.25rem;
+    }
+
+    /* Navigation */
+    .nav-desktop {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-desktop a {
+      position: relative;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .nav-desktop a.active {
+      color: var(--primary);
+    }
+
+    .nav-desktop a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      bottom: -4px;
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-desktop a:hover::after {
+      width: 100%;
+    }
+
+    /* Burger Menu */
+    .burger-menu {
+      display: none;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .burger-menu span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: var(--text);
+      margin: 5px 0;
+      transition: var(--transition);
+    }
+
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--card-bg);
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      transition: var(--transition);
+      padding: 5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nav-mobile.active {
+      right: 0;
+    }
+
+    .nav-mobile a {
+      color: var(--text);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-mobile a.active {
+      color: var(--primary);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: var(--transition);
+      margin-left: 1.5rem;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary);
+      color: white;
+      padding: 12px 28px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+      gap: 0.5rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      box-shadow: 0 4px 20px rgba(247, 37, 133, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: #e5177b;
+      box-shadow: 0 8px 25px rgba(247, 37, 133, 0.4);
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 100%;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .about-img:hover img {
+      transform: scale(1.03);
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .team-member {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-img {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .team-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .team-member:hover .team-img img {
+      transform: scale(1.05);
+    }
+
+    .team-info {
+      padding: 1.5rem;
+    }
+
+    .team-position {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .team-social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .team-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .team-social a:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Stats Section */
+    .stats {
+      background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(67, 97, 238, 0.9)), 
+                  url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
+      color: white;
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .stat-item {
+      padding: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-text {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: var(--card-bg);
+      padding: 5rem 0;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .testimonial-text::before {
+      content: '"';
+      font-size: 4rem;
+      position: absolute;
+      top: -1.5rem;
+      left: -1rem;
+      color: var(--primary-light);
+      opacity: 0.2;
+      font-family: serif;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .author-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-info h4 {
+      margin-bottom: 0.25rem;
+    }
+
+    .author-position {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--card-bg);
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+
+    .footer-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-item i {
+      color: var(--secondary);
+      margin-top: 0.25rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--text);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-img {
+        order: -1;
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop {
+        display: none;
+      }
+      
+      .burger-menu {
+        display: block;
+      }
+      
+      .burger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .burger-menu.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .burger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      section {
+        padding: 3rem 0;
+      }
+      
+      .stat-number {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-home"></i>
+        <span>PrimeRent</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="contact.html">О нас</a>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </nav>
+      
+      <div class="burger-menu" id="burgerMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <div class="nav-mobile" id="navMobile">
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="contact.html">О нас</a> 
+        <button class="theme-toggle" id="themeToggleMobile">
+          <i class="fas fa-moon"></i> Сменить тему
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main style="margin-top: var(--header-height);">
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center/cover; min-height: 400px; display: flex; align-items: center; color: white;">
+      <div class="container">
+        <h1>О компании PrimeRent</h1>
+        <p style="color: rgba(255,255,255,0.8); max-width: 700px;">Мы создаем комфортные условия для аренды недвижимости в Беларуси, предлагая лучшие решения для наших клиентов.</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>Наша история</h2>
+            <p>PrimeRent был основан в 2015 году с целью изменить рынок аренды недвижимости в Беларуси. Начиная с небольшого агентства в Минске, мы выросли в крупнейший сервис по аренде премиальной недвижимости по всей стране.</p>
+            <p>Наша миссия — сделать процесс аренды простым, прозрачным и комфортным для всех сторон. Мы стремимся к тому, чтобы каждый клиент находил именно то, что ищет, в кратчайшие сроки и на выгодных условиях.</p>
+            <p>За годы работы мы помогли более чем 5 000 клиентам найти идеальное жилье или коммерческое помещение для своих нужд.</p>
+            <button class="btn" id="contactBtn" style="margin-top: 1.5rem;">
+              <i class="fas fa-phone"></i> Связаться с нами
+            </button>
+          </div>
+          <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Наш офис">
+          </div>
+        </div>
+
+        <div class="about-features">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-medal"></i>
+            </div>
+            <h3>Качество</h3>
+            <p>Все объекты проходят тщательную проверку перед добавлением в каталог</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Надежность</h3>
+            <p>Юридическое сопровождение каждой сделки для вашей безопасности</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <h3>Поддержка</h3>
+            <p>Круглосуточная поддержка клиентов по всем вопросам</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <h3>Индивидуальный подход</h3>
+            <p>Персональный менеджер для каждого клиента</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="container">
+        <h2>PrimeRent в цифрах</h2>
+        <p style="opacity: 0.9;">Наши достижения за годы работы на рынке</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">8</div>
+            <div class="stat-text">лет на рынке</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5 000+</div>
+            <div class="stat-text">довольных клиентов</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">25</div>
+            <div class="stat-text">городов Беларуси</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">98%</div>
+            <div class="stat-text">положительных отзывов</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+      <div class="container">
+        <div class="section-title">
+          <h2>Наша команда</h2>
+          <p>Профессионалы, которые помогут вам найти идеальное жилье</p>
+        </div>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Александр Петров">
+            </div>
+            <div class="team-info">
+              <h3>Александр Петров</h3>
+              <div class="team-position">Основатель и CEO</div>
+              <p>15 лет опыта в недвижимости. Создал PrimeRent с нуля.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Екатерина Смирнова">
+            </div>
+            <div class="team-info">
+              <h3>Екатерина Смирнова</h3>
+              <div class="team-position">Директор по аренде</div>
+              <p>10 лет работы с клиентами. Знает все о рынке аренды.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Дмитрий Иванов">
+            </div>
+            <div class="team-info">
+              <h3>Дмитрий Иванов</h3>
+              <div class="team-position">Руководитель отдела проверки</div>
+              <p>Обеспечивает качество всех объектов в каталоге.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Анна Козлова">
+            </div>
+            <div class="team-info">
+              <h3>Анна Козлова</h3>
+              <div class="team-position">Юрист</div>
+              <p>Сопровождает все сделки и проверяет документы.</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-title">
+          <h2>Отзывы наших клиентов</h2>
+          <p>Что говорят люди, которые уже воспользовались нашими услугами</p>
+        </div>
+        
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              Нашли через PrimeRent отличную квартиру в центре Минска. Все было организовано на высшем уровне - от просмотра до подписания договора. Особенно хочу отметить работу менеджера Екатерины!
+            </div>
+            <div class="testimonial-author">
+              <div class="author-img">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Марина">
+              </div>
+              <div class="author-info">
+                <h4>Марина Соколова</h4>
+                <div class="author-position">Арендатор квартиры</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              Сдаю через PrimeRent два офиса в бизнес-центре. Сервис на высоте - сами находят клиентов, готовят документы, решают все вопросы. Никаких хлопот, только стабильный доход. Рекомендую!
+            </div>
+            <div class="testimonial-author">
+              <div class="author-img">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Андрей">
+              </div>
+              <div class="author-info">
+                <h4>Андрей Волков</h4>
+                <div class="author-position">Арендодатель</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              Переехали в Минск из Гродно и через PrimeRent быстро нашли дом для всей семьи. Учли все наши пожелания - близость к школе, парковка, зеленая зона. Спасибо за профессионализм!
+            </div>
+            <div class="testimonial-author">
+              <div class="author-img">
+                <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=699&q=80" alt="Семья">
+              </div>
+              <div class="author-info">
+                <h4>Семья Ивановых</h4>
+                <div class="author-position">Арендаторы дома</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h4>PrimeRent</h4>
+          <p>Премиальная аренда недвижимости в Беларуси. Лучшие предложения на рынке.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-viber"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Навигация</h4>
+          <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог</a>
+            <a href="about.html">О компании</a>
+            <a href="contact.html">Контакты</a>
+            <a href="#">Условия аренды</a>
+            <a href="#">FAQ</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Контакты</h4>
+          <div class="footer-contact">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Минск, ул. Ленина, 15</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>+375 (29) 123-45-67</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@primerent.by</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <span>Пн-Пт: 9:00-19:00<br>Сб-Вс: 10:00-16:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2025 PrimeRent. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    const themeIcon = themeToggle.querySelector('i');
+    const themeIconMobile = themeToggleMobile.querySelector('i');
+    
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      
+      if (document.body.classList.contains('dark')) {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        themeIconMobile.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggleMobile.addEventListener('click', toggleTheme);
+    
+    // Check saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+      themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navMobile = document.getElementById('navMobile');
+    
+    burgerMenu.addEventListener('click', () => {
+      burgerMenu.classList.toggle('active');
+      navMobile.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#navMobile a').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerMenu.classList.remove('active');
+        navMobile.classList.remove('active');
+      });
+    });
+
+    // Contact button
+    document.getElementById('contactBtn').addEventListener('click', () => {
+      window.location.href = 'contact.html';
+    });
+  </script>
+</body>
+</html>

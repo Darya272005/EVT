@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleCanvas | Модные тренды</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+  <style>
+    :root {
+      --primary: #6d597a;       /* Уникальный фиолетово-коричневый */
+      --primary-light: #e2d7e8; /* Светлый лавандовый */
+      --primary-dark: #563d5e;  /* Темный фиолетовый */
+      --secondary: #b56576;     /* Розово-красный */
+      --accent: #e56b6f;        /* Коралловый */
+      --text: #355070;         /* Темно-синий текст */
+      --text-light: #6c757d;
+      --bg: #f8f9fa;           /* Светлый фон */
+      --card-bg: #ffffff;
+      --border: #e9ecef;
+      --shadow: 0 4px 25px rgba(109, 89, 122, 0.15);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+      --header-height: 80px;
+    }
+
+    .dark {
+      --primary: #b56576;
+      --primary-light: #2d2d42;
+      --primary-dark: #9e4a5a;
+      --text: #f8f9fa;
+      --text-light: #adb5bd;
+      --bg: #1a1a2e;
+      --card-bg: #16213e;
+      --border: #4a4a6a;
+      --shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      transition: var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+
+    p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      margin: 1.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100;
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .dark header {
+      background: rgba(26, 26, 46, 0.97);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    /* Navigation */
+    .nav-desktop {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-desktop a {
+      position: relative;
+      font-weight: 500;
+      color: var(--text);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      padding: 0.5rem 0;
+    }
+
+    .nav-desktop a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: 0;
+      left: 0;
+      transition: var(--transition);
+      border-radius: 1px;
+    }
+
+    .nav-desktop a:hover::after {
+      width: 100%;
+    }
+
+    /* Burger Menu */
+    .burger-menu {
+      display: none;
+      cursor: pointer;
+      z-index: 101;
+      width: 30px;
+      height: 20px;
+      position: relative;
+    }
+
+    .burger-menu span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: var(--text);
+      position: absolute;
+      left: 0;
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    .burger-menu span:nth-child(1) {
+      top: 0;
+    }
+    
+    .burger-menu span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .burger-menu span:nth-child(3) {
+      bottom: 0;
+    }
+
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background: var(--card-bg);
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      transition: var(--transition);
+      padding: 6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nav-mobile.active {
+      right: 0;
+    }
+
+    .nav-mobile a {
+      color: var(--text);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .nav-mobile a:hover {
+      color: var(--primary);
+      padding-left: 10px;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: var(--transition);
+      margin-left: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .trends-hero {
+      margin-top: var(--header-height);
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trends-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(109, 89, 122, 0.3), rgba(181, 101, 118, 0.3));
+      z-index: 0;
+    }
+
+    .trends-hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .trends-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .trends-hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(109, 89, 122, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    /* Swiper Slider */
+    .trends-slider {
+      width: 100%;
+      height: 550px;
+      margin: 3rem auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .swiper-slide {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem;
+      color: white;
+      overflow: hidden;
+    }
+
+    .swiper-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+      z-index: 1;
+    }
+
+    .swiper-slide img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 8s ease;
+    }
+
+    .swiper-slide-active img {
+      transform: scale(1.1);
+    }
+
+    .slide-content {
+      max-width: 600px;
+      background: rgba(109, 89, 122, 0.7);
+      padding: 2rem;
+      border-radius: var(--radius);
+      position: relative;
+      z-index: 2;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 0.5s ease 0.3s;
+    }
+
+    .swiper-slide-active .slide-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .slide-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .slide-content p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .swiper-pagination-bullet {
+      width: 14px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      opacity: 1;
+      transition: var(--transition);
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .swiper-button-next, 
+    .swiper-button-prev {
+      color: white;
+      background: rgba(109, 89, 122, 0.7);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .swiper-button-next:hover, 
+    .swiper-button-prev:hover {
+      background: var(--primary);
+    }
+
+    .swiper-button-next::after, 
+    .swiper-button-prev::after {
+      font-size: 1.5rem;
+    }
+
+    /* Fashion Grid */
+    .fashion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .fashion-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: none;
+      position: relative;
+      transform: translateY(0);
+    }
+
+    .fashion-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(109, 89, 122, 0.25);
+    }
+
+    .fashion-img {
+      height: 380px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .fashion-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .fashion-card:hover .fashion-img img {
+      transform: scale(1.08);
+    }
+
+    .fashion-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 1;
+    }
+
+    .fashion-actions {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .fashion-card:hover .fashion-actions {
+      opacity: 1;
+    }
+
+    .fashion-action-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .fashion-action-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .fashion-info {
+      padding: 1.8rem;
+    }
+
+    .fashion-info h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .fashion-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .fashion-description {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Trend Categories */
+    .trend-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .trend-category {
+      padding: 0.75rem 1.5rem;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .trend-category:hover, .trend-category.active {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Seasonal Trends */
+    .seasonal-trends {
+      margin-top: 5rem;
+    }
+
+    .season-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .season-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(109, 89, 122, 0.2);
+    }
+
+    .season-img {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .season-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .season-card:hover .season-img img {
+      transform: scale(1.05);
+    }
+
+    .season-content {
+      padding: 1.5rem;
+    }
+
+    .season-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 99;
+      box-shadow: 0 4px 15px rgba(109, 89, 122, 0.3);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(109, 89, 122, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--card-bg);
+      padding: 5rem 0 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-col a {
+      color: var(--text-light);
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(109, 89, 122, 0.1);
+      color: var(--primary);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .trends-slider {
+        height: 450px;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop {
+        display: none;
+      }
+      
+      .burger-menu {
+        display: flex;
+      }
+      
+      .trends-slider {
+        height: 400px;
+      }
+      
+      .fashion-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .fashion-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .trends-slider {
+        height: 350px;
+      }
+      
+      .trend-categories {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-palette"></i>
+        <span>StyleCanvas</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html">Главная</a>
+        <a href="trends.html" class="active">Тренды</a>
+        <a href="wardrobe.html">Гардероб</a>
+        <a href="quiz.html">Тест стиля</a>
+        <a href="blog.html">Блог</a>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+          <span>Тема</span>
+        </button>
+      </nav>
+      
+      <div class="burger-menu" id="burgerMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <div class="nav-mobile" id="navMobile">
+        <a href="index.html">Главная</a>
+        <a href="trends.html" class="active">Тренды</a>
+        <a href="wardrobe.html">Гардероб</a>
+        <a href="quiz.html">Тест стиля</a>
+        <a href="blog.html">Блог</a>
+        <button class="theme-toggle" id="themeToggleMobile">
+          <i class="fas fa-moon"></i> Сменить тему
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="trends-hero">
+    <div class="container">
+      <div class="trends-hero-content">
+        <h1>Актуальные модные тренды</h1>
+        <p>Откройте для себя главные тенденции этого сезона и создавайте стильные образы с нашими рекомендациями</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="trends">
+    <div class="container">
+      <div class="section-title">
+        <h2>Топ тренды этого сезона</h2>
+        <p>Исследуйте самые популярные направления в моде и стиле</p>
+      </div>
+
+      <div class="trend-categories">
+        <div class="trend-category active">Все</div>
+        <div class="trend-category">Женщины</div>
+        <div class="trend-category">Мужчины</div>
+        <div class="trend-category">Обувь</div>
+        <div class="trend-category">Аксессуары</div>
+        <div class="trend-category">Цвета</div>
+      </div>
+
+      <!-- Slider main container -->
+      <div class="trends-slider swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Летние тренды">
+            <div class="slide-content">
+              <h3>Летние тренды 2023</h3>
+              <p>Яркие цвета, воздушные ткани и смелые принты - узнайте, как выглядеть стильно этим летом.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-right"></i> Исследовать
+              </button>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Деним">
+            <div class="slide-content">
+              <h3>Деним на все случаи жизни</h3>
+              <p>Как носить джинсовую одежду в этом сезоне? Новые силуэты и неожиданные сочетания.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-right"></i> Исследовать
+              </button>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Аксессуары">
+            <div class="slide-content">
+              <h3>Аксессуары сезона</h3>
+              <p>Какие сумки, украшения и головные уборы сделают ваш образ завершенным и стильным.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-right"></i> Исследовать
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+        
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="looks">
+    <div class="container">
+      <div class="section-title">
+        <h2>Готовые образы по трендам</h2>
+        <p>Вдохновляйтесь и создавайте свои уникальные сочетания</p>
+      </div>
+
+      <div class="fashion-grid">
+        <div class="fashion-card">
+          <div class="fashion-img">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Вечерний образ">
+            <div class="fashion-tag">Вечер</div>
+            <div class="fashion-actions">
+              <button class="fashion-action-btn" title="Добавить в избранное">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="fashion-action-btn" title="Сохранить в гардероб">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <div class="fashion-info">
+            <h3>Элегантный вечерний образ</h3>
+            <div class="fashion-meta">
+              <span><i class="fas fa-calendar-alt"></i> 15 июня 2023</span>
+              <span><i class="fas fa-heart"></i> 245</span>
+            </div>
+            <p class="fashion-description">Идеальное сочетание для романтического ужина или светского мероприятия. Платье с открытыми плечами и акцентные украшения.</p>
+            <button class="btn" style="width: 100%;">
+              <i class="fas fa-magic"></i> Создать похожий
+            </button>
+          </div>
+        </div>
+
+        <div class="fashion-card">
+          <div class="fashion-img">
+            <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Офисный образ">
+            <div class="fashion-tag">Офис</div>
+            <div class="fashion-actions">
+              <button class="fashion-action-btn" title="Добавить в избранное">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="fashion-action-btn" title="Сохранить в гардероб">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <div class="fashion-info">
+            <h3>Деловой стиль с изюминкой</h3>
+            <div class="fashion-meta">
+              <span><i class="fas fa-calendar-alt"></i> 10 июня 2023</span>
+              <span><i class="fas fa-heart"></i> 189</span>
+            </div>
+            <p class="fashion-description">Как выглядеть профессионально, но не скучно? Классический блейзер с неожиданными деталями и акцентной блузкой.</p>
+            <button class="btn" style="width: 100%;">
+              <i class="fas fa-magic"></i> Создать похожий
+            </button>
+          </div>
+        </div>
+
+        <div class="fashion-card">
+          <div class="fashion-img">
+            <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Повседневный образ">
+            <div class="fashion-tag">Повседневный</div>
+            <div class="fashion-actions">
+              <button class="fashion-action-btn" title="Добавить в избранное">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="fashion-action-btn" title="Сохранить в гардероб">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <div class="fashion-info">
+            <h3>Уютный casual на каждый день</h3>
+            <div class="fashion-meta">
+              <span><i class="fas fa-calendar-alt"></i> 5 июня 2023</span>
+              <span><i class="fas fa-heart"></i> 312</span>
+            </div>
+            <p class="fashion-description">Комфортно и стильно - джинсы с модным кроем, объемный свитер и удобные кроссовки. Идеально для прогулок и встреч с друзьями.</p>
+            <button class="btn" style="width: 100%;">
+              <i class="fas fa-magic"></i> Создать похожий
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seasonal-trends">
+    <div class="container">
+      <div class="section-title">
+        <h2>Сезонные тренды</h2>
+        <p>Что актуально в этом году по сезонам</p>
+      </div>
+
+      <div class="fashion-grid">
+        <div class="season-card">
+          <div class="season-img">
+            <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Весна">
+          </div>
+          <div class="season-content">
+            <h3>Весна 2023</h3>
+            <p>Нежные пастельные тона, воздушные ткани и цветочные принты</p>
+          </div>
+        </div>
+
+        <div class="season-card">
+          <div class="season-img">
+            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Лето">
+          </div>
+          <div class="season-content">
+            <h3>Лето 2023</h3>
+            <p>Яркие цвета, минималистичные силуэты и экологичные материалы</p>
+          </div>
+        </div>
+
+        <div class="season-card">
+          <div class="season-img">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Осень">
+          </div>
+          <div class="season-content">
+            <h3>Осень 2023</h3>
+            <p>Теплые землистые оттенки, многослойность и объемные формы</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3>StyleCanvas</h3>
+          <p>Ваш персонализированный гид по миру моды и стиля. Уникальные рекомендации, виртуальный гардероб и вдохновение для создания идеальных образов.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Разделы</h3>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="trends.html">Тренды</a></li>
+            <li><a href="wardrobe.html">Гардероб</a></li>
+            <li><a href="quiz.html">Тест стиля</a></li>
+            <li><a href="blog.html">Блог</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Помощь</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+            <li><a href="#">Условия использования</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Контакты</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Минск, ул. Стильная, 10</li>
+            <li><i class="fas fa-phone"></i> +375 (29) 765-43-21</li>
+            <li><i class="fas fa-envelope"></i> hello@stylecanvas.by</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 StyleCanvas. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#header" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize Swiper with custom effects
+    const swiper = new Swiper('.trends-slider', {
+      loop: true,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      effect: 'creative',
+      creativeEffect: {
+        prev: {
+          shadow: true,
+          translate: [0, 0, -400],
+        },
+        next: {
+          translate: ['100%', 0, 0],
+        },
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        slideChange: function() {
+          const slides = document.querySelectorAll('.swiper-slide');
+          slides.forEach(slide => {
+            const content = slide.querySelector('.slide-content');
+            content.style.transform = 'translateY(50px)';
+            content.style.opacity = '0';
+          });
+          
+          const activeSlide = document.querySelector('.swiper-slide-active');
+          const activeContent = activeSlide.querySelector('.slide-content');
+          setTimeout(() => {
+            activeContent.style.transform = 'translateY(0)';
+            activeContent.style.opacity = '1';
+          }, 300);
+        }
+      }
+    });
+
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navMobile = document.getElementById('navMobile');
+    
+    burgerMenu.addEventListener('click', () => {
+      burgerMenu.classList.toggle('active');
+      navMobile.classList.toggle('active');
+      
+      if (navMobile.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#navMobile a').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerMenu.classList.remove('active');
+        navMobile.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    const themeIcon = themeToggle.querySelector('i');
+    const themeIconMobile = themeToggleMobile.querySelector('i');
+    
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      
+      if (document.body.classList.contains('dark')) {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        themeIconMobile.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggleMobile.addEventListener('click', toggleTheme);
+    
+    // Check saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+      themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Trend categories filtering
+    const trendCategories = document.querySelectorAll('.trend-category');
+    
+    trendCategories.forEach(category => {
+      category.addEventListener('click', function() {
+        trendCategories.forEach(cat => cat.classList.remove('active'));
+        this.classList.add('active');
+        
+        // In a real app, this would filter the trends
+        // For demo, we'll just show an alert
+        alert(`Показаны тренды категории: ${this.textContent}`);
+      });
+    });
+
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.section-title, .fashion-card, .season-card');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+    
+    // Set initial state for animated elements
+    document.querySelectorAll('.section-title, .fashion-card, .season-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+  </script>
+</body>
+</html>

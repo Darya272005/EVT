@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleCanvas | Персонализированный гид по стилю</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+  <style>
+    :root {
+      --primary: #6d597a;       /* Уникальный фиолетово-коричневый */
+      --primary-light: #e2d7e8; /* Светлый лавандовый */
+      --primary-dark: #563d5e;  /* Темный фиолетовый */
+      --secondary: #b56576;     /* Розово-красный */
+      --accent: #e56b6f;        /* Коралловый */
+      --text: #355070;         /* Темно-синий текст */
+      --text-light: #6c757d;
+      --bg: #f8f9fa;           /* Светлый фон */
+      --card-bg: #ffffff;
+      --border: #e9ecef;
+      --shadow: 0 4px 25px rgba(109, 89, 122, 0.15);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+      --header-height: 80px;
+    }
+
+    .dark {
+      --primary: #b56576;
+      --primary-light: #2d2d42;
+      --primary-dark: #9e4a5a;
+      --text: #f8f9fa;
+      --text-light: #adb5bd;
+      --bg: #1a1a2e;
+      --card-bg: #16213e;
+      --border: #4a4a6a;
+      --shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.6;
+      transition: var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+
+    p {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      margin: 1.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      z-index: 100;
+      box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .dark header {
+      background: rgba(26, 26, 46, 0.97);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 1px;
+    }
+
+    .logo i {
+      font-size: 1.5rem;
+    }
+
+    /* Navigation */
+    .nav-desktop {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-desktop a {
+      position: relative;
+      font-weight: 500;
+      color: var(--text);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      padding: 0.5rem 0;
+    }
+
+    .nav-desktop a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      bottom: 0;
+      left: 0;
+      transition: var(--transition);
+      border-radius: 1px;
+    }
+
+    .nav-desktop a:hover::after {
+      width: 100%;
+    }
+
+    /* Burger Menu */
+    .burger-menu {
+      display: none;
+      cursor: pointer;
+      z-index: 101;
+      width: 30px;
+      height: 20px;
+      position: relative;
+    }
+
+    .burger-menu span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: var(--text);
+      position: absolute;
+      left: 0;
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    .burger-menu span:nth-child(1) {
+      top: 0;
+    }
+    
+    .burger-menu span:nth-child(2) {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .burger-menu span:nth-child(3) {
+      bottom: 0;
+    }
+
+    .nav-mobile {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background: var(--card-bg);
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      transition: var(--transition);
+      padding: 6rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nav-mobile.active {
+      right: 0;
+    }
+
+    .nav-mobile a {
+      color: var(--text);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      transition: var(--transition);
+    }
+
+    .nav-mobile a:hover {
+      color: var(--primary);
+      padding-left: 10px;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: var(--transition);
+      margin-left: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: var(--header-height);
+      min-height: calc(100vh - var(--header-height));
+      display: flex;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('https://i.pinimg.com/736x/05/f0/fe/05f0fe4cc04ba46d9cf21fa453000093.jpg') no-repeat center/cover;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(109, 89, 122, 0.3), rgba(181, 101, 118, 0.3));
+      z-index: 0;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 14px 32px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(109, 89, 122, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: var(--secondary);
+      box-shadow: 0 4px 25px rgba(181, 101, 118, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: #a04c5f;
+      box-shadow: 0 10px 35px rgba(181, 101, 118, 0.4);
+    }
+
+    /* Swiper Slider */
+    .trends-slider {
+      width: 100%;
+      height: 550px;
+      margin: 3rem auto;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .swiper-slide {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem;
+      color: white;
+      overflow: hidden;
+    }
+
+    .swiper-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+      z-index: 1;
+    }
+
+    .swiper-slide img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 8s ease;
+    }
+
+    .swiper-slide-active img {
+      transform: scale(1.1);
+    }
+
+    .slide-content {
+      max-width: 600px;
+      background: rgba(109, 89, 122, 0.7);
+      padding: 2rem;
+      border-radius: var(--radius);
+      position: relative;
+      z-index: 2;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: all 0.5s ease 0.3s;
+    }
+
+    .swiper-slide-active .slide-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .slide-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .slide-content p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .swiper-pagination-bullet {
+      width: 14px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      opacity: 1;
+      transition: var(--transition);
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+
+    .swiper-button-next, 
+    .swiper-button-prev {
+      color: white;
+      background: rgba(109, 89, 122, 0.7);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .swiper-button-next:hover, 
+    .swiper-button-prev:hover {
+      background: var(--primary);
+    }
+
+    .swiper-button-next::after, 
+    .swiper-button-prev::after {
+      font-size: 1.5rem;
+    }
+
+    /* Fashion Grid */
+    .fashion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .fashion-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: none;
+      position: relative;
+      transform: translateY(0);
+    }
+
+    .fashion-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(109, 89, 122, 0.25);
+    }
+
+    .fashion-img {
+      height: 380px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .fashion-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .fashion-card:hover .fashion-img img {
+      transform: scale(1.08);
+    }
+
+    .fashion-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 1;
+    }
+
+    .fashion-actions {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .fashion-card:hover .fashion-actions {
+      opacity: 1;
+    }
+
+    .fashion-action-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .fashion-action-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .fashion-info {
+      padding: 1.8rem;
+    }
+
+    .fashion-info h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .fashion-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .fashion-description {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 100%;
+      position: relative;
+    }
+
+    .about-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(109, 89, 122, 0.2), rgba(181, 101, 118, 0.2));
+      z-index: 1;
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .about-img:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-text ul {
+      margin: 1.5rem 0 1.5rem 1.5rem;
+      color: var(--text-light);
+    }
+
+    .about-text li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .about-text li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Style Quiz */
+    .style-quiz {
+      background: var(--primary-light);
+      padding: 4rem;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-steps {
+      display: none;
+    }
+
+    .quiz-steps.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .quiz-question {
+      margin-bottom: 2rem;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .quiz-option {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quiz-option:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(109, 89, 122, 0.1);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--primary);
+      background: rgba(109, 89, 122, 0.05);
+    }
+
+    .quiz-option img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: calc(var(--radius) - 5px);
+      margin-bottom: 1rem;
+    }
+
+    .quiz-progress {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+
+    .quiz-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    .quiz-result {
+      display: none;
+      padding: 2rem;
+    }
+
+    .quiz-result.active {
+      display: block;
+    }
+
+    .result-style {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Virtual Wardrobe */
+    .wardrobe-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .wardrobe-categories {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      height: fit-content;
+    }
+
+    .wardrobe-categories h3 {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-list {
+      list-style: none;
+    }
+
+    .category-item {
+      margin-bottom: 0.75rem;
+    }
+
+    .category-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-light);
+      padding: 0.5rem;
+      border-radius: calc(var(--radius) - 5px);
+      transition: var(--transition);
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .category-btn:hover, .category-btn.active {
+      background: rgba(109, 89, 122, 0.1);
+      color: var(--primary);
+    }
+
+    .wardrobe-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .wardrobe-item {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .wardrobe-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(109, 89, 122, 0.2);
+    }
+
+    .wardrobe-item-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .wardrobe-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .wardrobe-item:hover .wardrobe-item-img img {
+      transform: scale(1.05);
+    }
+
+    .wardrobe-item-info {
+      padding: 1rem;
+    }
+
+    .wardrobe-item-info h4 {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .wardrobe-item-info p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 0;
+    }
+
+    .outfit-builder {
+      margin-top: 3rem;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .outfit-preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+      min-height: 300px;
+    }
+
+    .outfit-slot {
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px dashed var(--border);
+    }
+
+    .outfit-slot:hover {
+      border-color: var(--primary);
+    }
+
+    .outfit-slot i {
+      font-size: 2rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .outfit-slot span {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .outfit-slot.filled {
+      border-style: solid;
+      background: var(--card-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .outfit-slot.filled img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .remove-item {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 25px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      cursor: pointer;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .outfit-slot:hover .remove-item {
+      opacity: 1;
+    }
+
+    .outfit-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    /* Blog Section */
+    .blog-post {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .blog-post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(109, 89, 122, 0.2);
+    }
+
+    .blog-post:last-child {
+      margin-bottom: 0;
+    }
+
+    .blog-img {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .blog-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .blog-post:hover .blog-img img {
+      transform: scale(1.05);
+    }
+
+    .blog-content {
+      padding: 2rem;
+    }
+
+    .blog-meta {
+      display: flex;
+      gap: 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .blog-content h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1rem;
+    }
+
+    .blog-excerpt {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 5rem 0;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80') no-repeat center/cover;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter h2 {
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .newsletter p {
+      margin-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 16px 20px;
+      border: none;
+      border-radius: var(--radius) 0 0 var(--radius);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      transition: var(--transition);
+      font-family: inherit;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      background: white;
+    }
+
+    .newsletter-btn {
+      background: var(--text);
+      color: white;
+      border: none;
+      padding: 0 2rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .newsletter-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--card-bg);
+      padding: 5rem 0 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-col a {
+      color: var(--text-light);
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(109, 89, 122, 0.1);
+      color: var(--primary);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 99;
+      box-shadow: 0 4px 15px rgba(109, 89, 122, 0.3);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(109, 89, 122, 0.4);
+    }
+
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .wardrobe-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .wardrobe-categories {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .about-content,
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .about-img {
+        order: -1;
+        height: 400px;
+      }
+      
+      .trends-slider {
+        height: 450px;
+      }
+      
+      .blog-post {
+        grid-template-columns: 1fr;
+      }
+      
+      .blog-img {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-desktop {
+        display: none;
+      }
+      
+      .burger-menu {
+        display: flex;
+      }
+      
+      .burger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .burger-menu.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .burger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .btn-outline {
+        margin-left: 0;
+      }
+      
+      section {
+        padding: 4rem 0;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .style-quiz {
+        padding: 2rem;
+      }
+      
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+      
+      .outfit-preview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .fashion-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .trends-slider {
+        height: 400px;
+      }
+      
+      .about-img {
+        height: 300px;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-input {
+        border-radius: var(--radius);
+      }
+      
+      .newsletter-btn {
+        border-radius: var(--radius);
+        padding: 14px;
+        margin-top: 1rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .style-quiz {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <i class="fas fa-palette"></i>
+        <span>StyleCanvas</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="#home">Главная</a>
+        <a href="catalog.html">Тренды</a>
+        <a href="#wardrobe">Гардероб</a>
+        <a href="#quiz">Тест стиля</a>
+        <a href="#blog">Блог</a>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+          <span>Тема</span>
+        </button>
+      </nav>
+      
+      <div class="burger-menu" id="burgerMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      
+      <div class="nav-mobile" id="navMobile">
+        <a href="#home">Главная</a>
+        <a href="catalog.html">Тренды</a>
+        <a href="#wardrobe">Гардероб</a>
+        <a href="#quiz">Тест стиля</a>
+        <a href="#blog">Блог</a>
+        <button class="theme-toggle" id="themeToggleMobile">
+          <i class="fas fa-moon"></i> Сменить тему
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Раскройте свой уникальный стиль</h1>
+        <p>Персонализированные рекомендации, виртуальный гардероб и вдохновение для создания идеальных образов. Ваш стиль - ваше искусство.</p>
+        <div class="btn-group">
+          <button class="btn floating" id="viewTrendsBtn">
+            <i class="fas fa-fire"></i> Исследовать тренды
+          </button>
+          <button class="btn btn-outline floating" id="startQuizBtn" style="animation-delay: 0.2s;">
+            <i class="fas fa-star"></i> Тест стиля
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trends" id="trends">
+    <div class="container">
+      <div class="section-title">
+        <h2>Актуальные тренды</h2>
+        <p>Откройте для себя главные модные тенденции этого сезона</p>
+      </div>
+
+      <!-- Slider main container -->
+      <div class="trends-slider swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide">
+            <img src="https://i.pinimg.com/736x/2a/21/a1/2a21a16529b2208a6c2950aba42c63d3.jpg" alt="Летние тренды">
+            <div class="slide-content">
+              <h3>Летние тренды 2023</h3>
+              <p>Яркие цвета, воздушные ткани и смелые принты - узнайте, как выглядеть стильно этим летом.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-right"></i> Исследовать
+              </button>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://fluffyann.ru/wp-content/uploads/2024/09/sayj_g3ti9k.jpg" alt="Деним">
+            <div class="slide-content">
+              <h3>Деним на все случаи жизни</h3>
+              <p>Как носить джинсовую одежду в этом сезоне? Новые силуэты и неожиданные сочетания.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-right"></i> Исследовать
+              </button>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <img src="https://i.pinimg.com/originals/a4/69/3b/a4693bad7fcbca6910b68d7393c88582.jpg" alt="Аксессуары">
+            <div class="slide-content">
+              <h3>Аксессуары сезона</h3>
+              <p>Какие сумки, украшения и головные уборы сделают ваш образ завершенным и стильным.</p>
+              <button class="btn btn-outline" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-right"></i> Исследовать
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+        
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="looks" id="looks">
+    <div class="container">
+      <div class="section-title">
+        <h2>Готовые образы</h2>
+        <p>Вдохновляйтесь и создавайте свои уникальные сочетания</p>
+      </div>
+
+      <div class="fashion-grid">
+        <div class="fashion-card">
+          <div class="fashion-img">
+            <img src="https://i.pinimg.com/736x/52/d9/ef/52d9ef0a5b2e480dd48321dc608f0276.jpg" alt="Вечерний образ">
+            <div class="fashion-tag">Вечер</div>
+            <div class="fashion-actions">
+              <button class="fashion-action-btn" title="Добавить в избранное">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="fashion-action-btn" title="Сохранить в гардероб">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <div class="fashion-info">
+            <h3>Элегантный вечерний образ</h3>
+            <div class="fashion-meta">
+              <span><i class="fas fa-calendar-alt"></i> 15 июня 2023</span>
+              <span><i class="fas fa-heart"></i> 245</span>
+            </div>
+            <p class="fashion-description">Идеальное сочетание для романтического ужина или светского мероприятия. Платье с открытыми плечами и акцентные украшения.</p>
+            <button class="btn" style="width: 100%;">
+              <i class="fas fa-magic"></i> Создать похожий
+            </button>
+          </div>
+        </div>
+
+        <div class="fashion-card">
+          <div class="fashion-img">
+            <img src="https://i.pinimg.com/736x/2f/b2/d7/2fb2d775c7d8788e46cb12923a6f4961.jpg" alt="Офисный образ">
+            <div class="fashion-tag">Офис</div>
+            <div class="fashion-actions">
+              <button class="fashion-action-btn" title="Добавить в избранное">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="fashion-action-btn" title="Сохранить в гардероб">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <div class="fashion-info">
+            <h3>Деловой стиль с изюминкой</h3>
+            <div class="fashion-meta">
+              <span><i class="fas fa-calendar-alt"></i> 10 июня 2023</span>
+              <span><i class="fas fa-heart"></i> 189</span>
+            </div>
+            <p class="fashion-description">Как выглядеть профессионально, но не скучно? Классический блейзер с неожиданными деталями и акцентной блузкой.</p>
+            <button class="btn" style="width: 100%;">
+              <i class="fas fa-magic"></i> Создать похожий
+            </button>
+          </div>
+        </div>
+
+        <div class="fashion-card">
+          <div class="fashion-img">
+            <img src="https://i.pinimg.com/736x/6a/13/16/6a1316c723b2b4133e4ec75c49892d70.jpg" alt="Повседневный образ">
+            <div class="fashion-tag">Повседневный</div>
+            <div class="fashion-actions">
+              <button class="fashion-action-btn" title="Добавить в избранное">
+                <i class="fas fa-heart"></i>
+              </button>
+              <button class="fashion-action-btn" title="Сохранить в гардероб">
+                <i class="fas fa-save"></i>
+              </button>
+            </div>
+          </div>
+          <div class="fashion-info">
+            <h3>Уютный casual на каждый день</h3>
+            <div class="fashion-meta">
+              <span><i class="fas fa-calendar-alt"></i> 5 июня 2023</span>
+              <span><i class="fas fa-heart"></i> 312</span>
+            </div>
+            <p class="fashion-description">Комфортно и стильно - джинсы с модным кроем, объемный свитер и удобные кроссовки. Идеально для прогулок и встреч с друзьями.</p>
+            <button class="btn" style="width: 100%;">
+              <i class="fas fa-magic"></i> Создать похожий
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wardrobe" id="wardrobe">
+    <div class="container">
+      <div class="section-title">
+        <h2>Виртуальный гардероб</h2>
+        <p>Создавайте и сохраняйте свои идеальные образы</p>
+      </div>
+      
+      <div class="wardrobe-container">
+        <div class="wardrobe-categories">
+          <h3>Категории</h3>
+          <ul class="category-list">
+            <li class="category-item">
+              <button class="category-btn active">
+                <i class="fas fa-tshirt"></i> Верхняя одежда
+              </button>
+            </li>
+            <li class="category-item">
+              <button class="category-btn">
+                <i class="fas fa-tshirt"></i> Футболки
+              </button>
+            </li>
+            <li class="category-item">
+              <button class="category-btn">
+                <i class="fas fa-vest"></i> Рубашки
+              </button>
+            </li>
+            <li class="category-item">
+              <button class="category-btn">
+                <i class="fas fa-vest-patches"></i> Свитеры
+              </button>
+            </li>
+            <li class="category-item">
+              <button class="category-btn">
+                <i class="fas fa-jeans"></i> Брюки
+              </button>
+            </li>
+            <li class="category-item">
+              <button class="category-btn">
+                <i class="fas fa-shoe-prints"></i> Обувь
+              </button>
+            </li>
+            <li class="category-item">
+              <button class="category-btn">
+                <i class="fas fa-ring"></i> Аксессуары
+              </button>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <div class="wardrobe-items">
+            <div class="wardrobe-item">
+              <div class="wardrobe-item-img">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" alt="Джинсовая куртка">
+              </div>
+              <div class="wardrobe-item-info">
+                <h4>Джинсовая куртка</h4>
+                <p>Синяя, oversize</p>
+              </div>
+            </div>
+            
+            <div class="wardrobe-item">
+              <div class="wardrobe-item-img">
+                <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=725&q=80" alt="Белая футболка">
+              </div>
+              <div class="wardrobe-item-info">
+                <h4>Белая футболка</h4>
+                <p>Хлопок, классика</p>
+              </div>
+            </div>
+            
+            <div class="wardrobe-item">
+              <div class="wardrobe-item-img">
+                <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Черные джинсы">
+              </div>
+              <div class="wardrobe-item-info">
+                <h4>Черные джинсы</h4>
+                <p>Слим, эластан</p>
+              </div>
+            </div>
+            
+            <div class="wardrobe-item">
+              <div class="wardrobe-item-img">
+                <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=812&q=80" alt="Белые кроссовки">
+              </div>
+              <div class="wardrobe-item-info">
+                <h4>Белые кроссовки</h4>
+                <p>Кожа, минимализм</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="outfit-builder">
+            <h3>Создайте свой образ</h3>
+            <p>Перетащите предметы одежды в соответствующие слоты, чтобы создать полный образ</p>
+            
+            <div class="outfit-preview">
+              <div class="outfit-slot" data-type="head">
+                <i class="fas fa-hat-cowboy"></i>
+                <span>Головной убор</span>
+              </div>
+              <div class="outfit-slot" data-type="top">
+                <i class="fas fa-tshirt"></i>
+                <span>Верх</span>
+              </div>
+              <div class="outfit-slot" data-type="bottom">
+                <i class="fas fa-jeans"></i>
+                <span>Низ</span>
+              </div>
+              <div class="outfit-slot" data-type="shoes">
+                <i class="fas fa-shoe-prints"></i>
+                <span>Обувь</span>
+              </div>
+            </div>
+            
+            <div class="outfit-actions">
+              <button class="btn btn-outline" style="color: var(--text); border-color: var(--primary);">
+                <i class="fas fa-random"></i> Сгенерировать
+              </button>
+              <button class="btn">
+                <i class="fas fa-save"></i> Сохранить образ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+      <div class="section-title">
+        <h2>Тест стиля</h2>
+        <p>Узнайте, какой стиль одежды вам подходит больше всего</p>
+      </div>
+      
+      <div class="style-quiz">
+        <div class="quiz-intro" id="quizIntro">
+          <h3>Найдите свой уникальный стиль</h3>
+          <p>Ответьте на несколько вопросов, и мы подберем для вас идеальные образы и рекомендации по стилю.</p>
+          <button class="btn" id="startQuiz" style="margin-top: 2rem;">
+            <i class="fas fa-play"></i> Начать тест
+          </button>
+        </div>
+        
+        <div class="quiz-steps" id="quizSteps">
+          <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="quizProgress"></div>
+          </div>
+          
+          <div class="quiz-step active" id="step1">
+            <div class="quiz-question">
+              <h3>Как бы вы описали свой обычный стиль одежды?</h3>
+            </div>
+            
+            <div class="quiz-options">
+              <div class="quiz-option" data-value="casual">
+                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Повседневный">
+                <p>Повседневный (джинсы, футболки, удобство)</p>
+              </div>
+              
+              <div class="quiz-option" data-value="classic">
+                <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Классический">
+                <p>Классический (блейзеры, рубашки, элегантность)</p>
+              </div>
+              
+              <div class="quiz-option" data-value="bohemian">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Бохо">
+                <p>Бохо (свободные силуэты, этнические принты)</p>
+              </div>
+              
+              <div class="quiz-option" data-value="minimalist">
+                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Минимализм">
+                <p>Минимализм (нейтральные цвета, простые формы)</p>
+              </div>
+            </div>
+            
+            <div class="quiz-nav">
+              <button class="btn btn-outline" id="nextStep1" style="color: var(--text); border-color: var(--primary);">
+                Далее <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="quiz-step" id="step2">
+            <div class="quiz-question">
+              <h3>Какие цвета вы предпочитаете в одежде?</h3>
+            </div>
+            
+            <div class="quiz-options">
+              <div class="quiz-option" data-value="neutral">
+                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Нейтральные">
+                <p>Нейтральные (белый, черный, бежевый, серый)</p>
+              </div>
+              
+              <div class="quiz-option" data-value="pastel">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Пастельные">
+                <p>Пастельные (мягкие розовые, голубые, мятные)</p>
+              </div>
+              
+              <div class="quiz-option" data-value="bright">
+                <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Яркие">
+                <p>Яркие (красный, желтый, синий, зеленый)</p>
+              </div>
+              
+              <div class="quiz-option" data-value="dark">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Темные">
+                <p>Темные (бордовый, темно-синий, изумрудный)</p>
+              </div>
+            </div>
+            
+            <div class="quiz-nav">
+              <button class="btn btn-outline" id="prevStep2" style="color: var(--text); border-color: var(--primary);">
+                <i class="fas fa-arrow-left"></i> Назад
+              </button>
+              <button class="btn btn-outline" id="nextStep2" style="color: var(--text); border-color: var(--primary);">
+                Далее <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="quiz-step" id="step3">
+            <div class="quiz-question">
+              <h3>Какой образ вам ближе всего?</h3>
+            </div>
+            
+            <div class="quiz-options">
+              <div class="quiz-option" data-value="elegant">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Элегантный">
+                <p>Элегантный и утонченный</p>
+              </div>
+              
+              <div class="quiz-option" data-value="comfort">
+                <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Комфортный">
+                <p>Комфортный и практичный</p>
+              </div>
+              
+              <div class="quiz-option" data-value="bold">
+                <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Смелый">
+                <p>Смелый и необычный</p>
+              </div>
+              
+              <div class="quiz-option" data-value="romantic">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Романтичный">
+                <p>Романтичный и женственный</p>
+              </div>
+            </div>
+            
+            <div class="quiz-nav">
+              <button class="btn btn-outline" id="prevStep3" style="color: var(--text); border-color: var(--primary);">
+                <i class="fas fa-arrow-left"></i> Назад
+              </button>
+              <button class="btn" id="showResults">
+                Узнать результат <i class="fas fa-star"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="quiz-result" id="quizResult">
+            <h3>Ваш стиль: <span id="resultStyle">Классический минимализм</span></h3>
+            <p>На основе ваших ответов мы определили, что вам больше всего подходит элегантный и сдержанный стиль с акцентом на качественные материалы и чистые линии.</p>
+            
+            <div class="result-style">
+              <h4>Рекомендации для вашего стиля:</h4>
+              <ul>
+                <li>Выбирайте одежду нейтральных тонов с акцентными деталями</li>
+                <li>Инвестируйте в качественные базовые вещи: блейзер, белую рубашку, классические брюки</li>
+                <li>Добавляйте интерес с помощью текстур и аксессуаров</li>
+                <li>Соблюдайте баланс между простотой и индивидуальностью</li>
+              </ul>
+            </div>
+            
+            <button class="btn" id="restartQuiz" style="margin-top: 2rem;">
+              <i class="fas fa-redo"></i> Пройти тест снова
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blog" id="blog">
+    <div class="container">
+      <div class="section-title">
+        <h2>Блог о стиле</h2>
+        <p>Последние статьи и советы от наших экспертов</p>
+      </div>
+
+      <div class="blog-post">
+        <div class="blog-img">
+          <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" alt="Как выбрать сумку">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span><i class="fas fa-user"></i> Анна Стилова</span>
+            <span><i class="fas fa-calendar-alt"></i> 12 июня 2023</span>
+          </div>
+          <h3>Как выбрать идеальную сумку под ваш стиль</h3>
+          <p class="blog-excerpt">Разбираемся, какие формы, размеры и материалы актуальны в этом сезоне и как подобрать сумку, которая подчеркнет вашу индивидуальность.</p>
+          <button class="btn btn-outline" style="color: var(--text); border-color: var(--primary);">
+            <i class="fas fa-book-reader"></i> Читать статью
+          </button>
+        </div>
+      </div>
+
+      <div class="blog-post">
+        <div class="blog-img">
+          <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Деним">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span><i class="fas fa-user"></i> Максим Денимов</span>
+            <span><i class="fas fa-calendar-alt"></i> 8 июня 2023</span>
+          </div>
+          <h3>Деним 2023: главные тренды и как их носить</h3>
+          <p class="blog-excerpt">От широких джинсов до джинсовых платьев - разбираем все актуальные модели и учимся сочетать их с другой одеждой.</p>
+          <button class="btn btn-outline" style="color: var(--text); border-color: var(--primary);">
+            <i class="fas fa-book-reader"></i> Читать статью
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>Подпишитесь на нашу рассылку</h2>
+        <p>Получайте персонализированные рекомендации по стилю, эксклюзивные советы и специальные предложения прямо на вашу почту.</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Ваш email" required>
+          <button type="submit" class="newsletter-btn">Подписаться</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <h3>StyleCanvas</h3>
+          <p>Ваш персонализированный гид по миру моды и стиля. Уникальные рекомендации, виртуальный гардероб и вдохновение для создания идеальных образов.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Разделы</h3>
+          <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#trends">Тренды</a></li>
+            <li><a href="#wardrobe">Гардероб</a></li>
+            <li><a href="#quiz">Тест стиля</a></li>
+            <li><a href="#blog">Блог</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Помощь</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+            <li><a href="#">Условия использования</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Контакты</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> Минск, ул. Стильная, 10</li>
+            <li><i class="fas fa-phone"></i> +375 (29) 765-43-21</li>
+            <li><i class="fas fa-envelope"></i> hello@stylecanvas.by</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 StyleCanvas. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#home" class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize Swiper with custom effects
+    const swiper = new Swiper('.trends-slider', {
+      loop: true,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+      },
+      effect: 'creative',
+      creativeEffect: {
+        prev: {
+          shadow: true,
+          translate: [0, 0, -400],
+        },
+        next: {
+          translate: ['100%', 0, 0],
+        },
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on: {
+        slideChange: function() {
+          const slides = document.querySelectorAll('.swiper-slide');
+          slides.forEach(slide => {
+            const content = slide.querySelector('.slide-content');
+            content.style.transform = 'translateY(50px)';
+            content.style.opacity = '0';
+          });
+          
+          const activeSlide = document.querySelector('.swiper-slide-active');
+          const activeContent = activeSlide.querySelector('.slide-content');
+          setTimeout(() => {
+            activeContent.style.transform = 'translateY(0)';
+            activeContent.style.opacity = '1';
+          }, 300);
+        }
+      }
+    });
+
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navMobile = document.getElementById('navMobile');
+    
+    burgerMenu.addEventListener('click', () => {
+      burgerMenu.classList.toggle('active');
+      navMobile.classList.toggle('active');
+      
+      if (navMobile.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#navMobile a').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerMenu.classList.remove('active');
+        navMobile.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    const themeIcon = themeToggle.querySelector('i');
+    const themeIconMobile = themeToggleMobile.querySelector('i');
+    
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      
+      if (document.body.classList.contains('dark')) {
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        themeIconMobile.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+    
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggleMobile.addEventListener('click', toggleTheme);
+    
+    // Check saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+      themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Newsletter form
+    const newsletterForm = document.querySelector('.newsletter-form');
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = newsletterForm.querySelector('input').value;
+      alert(`Спасибо за подписку, ${email}! Вы будете получать наши персональные рекомендации по стилю.`);
+      newsletterForm.reset();
+    });
+
+    // Button actions
+    document.getElementById('viewTrendsBtn').addEventListener('click', () => {
+      document.querySelector('#trends').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    document.getElementById('startQuizBtn').addEventListener('click', () => {
+      document.querySelector('#quiz').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Style quiz functionality
+    const quizIntro = document.getElementById('quizIntro');
+    const quizSteps = document.getElementById('quizSteps');
+    const startQuizBtn = document.getElementById('startQuiz');
+    const restartQuizBtn = document.getElementById('restartQuiz');
+    const quizProgress = document.getElementById('quizProgress');
+    const quizResult = document.getElementById('quizResult');
+    const resultStyle = document.getElementById('resultStyle');
+    
+    let currentStep = 1;
+    let userAnswers = {};
+    const styleResults = {
+      'casual-neutral-comfort': 'Повседневный комфорт',
+      'casual-neutral-elegant': 'Спортивный шик',
+      'casual-pastel-romantic': 'Нежный кэжуал',
+      'classic-neutral-elegant': 'Классический минимализм',
+      'classic-dark-elegant': 'Современная классика',
+      'bohemian-bright-bold': 'Бохо-шик',
+      'bohemian-pastel-romantic': 'Романтичный бохо',
+      'minimalist-neutral-elegant': 'Скандинавский минимализм'
+    };
+    
+    startQuizBtn.addEventListener('click', () => {
+      quizIntro.style.display = 'none';
+      quizSteps.style.display = 'block';
+      document.getElementById('step1').classList.add('active');
+      updateProgress();
+    });
+    
+    restartQuizBtn.addEventListener('click', () => {
+      quizResult.classList.remove('active');
+      document.getElementById('step1').classList.add('active');
+      currentStep = 1;
+      userAnswers = {};
+      updateProgress();
+      document.querySelector('#quiz').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Next/prev buttons
+    document.getElementById('nextStep1').addEventListener('click', () => {
+      saveAnswer(1);
+      document.getElementById('step1').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+      currentStep = 2;
+      updateProgress();
+    });
+    
+    document.getElementById('prevStep2').addEventListener('click', () => {
+      document.getElementById('step2').classList.remove('active');
+      document.getElementById('step1').classList.add('active');
+      currentStep = 1;
+      updateProgress();
+    });
+    
+    document.getElementById('nextStep2').addEventListener('click', () => {
+      saveAnswer(2);
+      document.getElementById('step2').classList.remove('active');
+      document.getElementById('step3').classList.add('active');
+      currentStep = 3;
+      updateProgress();
+    });
+    
+    document.getElementById('prevStep3').addEventListener('click', () => {
+      document.getElementById('step3').classList.remove('active');
+      document.getElementById('step2').classList.add('active');
+      currentStep = 2;
+      updateProgress();
+    });
+    
+    document.getElementById('showResults').addEventListener('click', () => {
+      saveAnswer(3);
+      showResults();
+    });
+    
+    // Quiz option selection
+    document.querySelectorAll('.quiz-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const step = this.closest('.quiz-step').id.replace('step', '');
+        const options = document.querySelectorAll(`#step${step} .quiz-option`);
+        
+        options.forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+    
+    function saveAnswer(step) {
+      const selectedOption = document.querySelector(`#step${step} .quiz-option.selected`);
+      if (selectedOption) {
+        userAnswers[`step${step}`] = selectedOption.getAttribute('data-value');
+      }
+    }
+    
+    function updateProgress() {
+      const progress = (currentStep / 3) * 100;
+      quizProgress.style.width = `${progress}%`;
+    }
+    
+    function showResults() {
+      const styleKey = `${userAnswers.step1}-${userAnswers.step2}-${userAnswers.step3}`;
+      const style = styleResults[styleKey] || 'Универсальный классический';
+      
+      resultStyle.textContent = style;
+      document.getElementById('step3').classList.remove('active');
+      quizResult.classList.add('active');
+      
+      // Scroll to results
+      setTimeout(() => {
+        quizResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+    
+    // Virtual wardrobe functionality
+    const wardrobeItems = document.querySelectorAll('.wardrobe-item');
+    const outfitSlots = document.querySelectorAll('.outfit-slot');
+    
+    wardrobeItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // In a real app, this would implement drag and drop
+        alert('В полной версии приложения вы сможете перетаскивать предметы одежды в слоты для создания образа');
+      });
+    });
+    
+    // Generate random outfit
+    document.querySelector('.outfit-actions .btn-outline').addEventListener('click', function() {
+      const slots = document.querySelectorAll('.outfit-slot:not(.filled)');
+      if (slots.length > 0) {
+        alert('В полной версии приложения это кнопка сгенерирует случайный образ на основе вашего гардероба');
+      } else {
+        alert('Все слоты уже заполнены. Очистите слоты, чтобы сгенерировать новый образ.');
+      }
+    });
+    
+    // Save outfit
+    document.querySelector('.outfit-actions .btn').addEventListener('click', function() {
+      alert('В полной версии приложения это сохранит созданный образ в ваш виртуальный гардероб');
+    });
+    
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.section-title, .fashion-card, .blog-post, .quiz-step');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+    
+    // Set initial state for animated elements
+    document.querySelectorAll('.section-title, .fashion-card, .blog-post, .quiz-step').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+  </script>
+</body>
+</html>
