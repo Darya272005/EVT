@@ -1,0 +1,93 @@
+:root {
+    --header-footer-bg: #3c5b9e; 
+    --word-color-1: #705d5d;
+    --word-color-2: #00be00;
+    --word-color-3: #9b9be5;
+    --word-color-4: #979717;
+    --word-color-5: #866286;
+    --first-letter-color-1: #241e59;
+    --first-letter-color-2: #43293e;
+    --first-letter-color-3: #243d4b;
+    --first-letter-color-4: #304825;
+    --first-letter-color-5: #525838;
+  }
+  
+  .header, .footer {
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    background-color: var(--header-footer-bg);
+    font-size: 30px;
+    padding-block: 5px;
+  }
+  
+  .header { top: 0; }
+  .footer { bottom: 0; }
+  
+  .wrapper:has(.main) {
+    display: flex;
+    max-width: none;
+    width: 100%;
+  }
+  
+  article.article p {
+    font-style: normal !important; 
+  }
+  
+  blockquote {
+    font-style: italic !important;
+  }
+  
+  body {
+    text-align: center;
+  }
+  
+  .word {
+    width: min-content;
+    text-align: left;
+    position: sticky;
+    top: 45px; 
+    padding: 5px;
+    color: white; 
+  }
+  
+  .word.first { background-color: var(--word-color-1); }
+  .word.second { background-color: var(--word-color-2); left: 68px; }
+  .word.third { background-color: var(--word-color-3); left: 89px; }
+  .word.fourth { background-color: var(--word-color-4); left: 134px; }
+  .word.fifth { background-color: var(--word-color-5); left: 204px; }
+  
+  .article.first p:nth-child(6)::first-letter { font-size: 100px; color: var(--first-letter-color-1); }
+  .article.second p:nth-child(5)::first-letter { font-size: 100px; color: var(--first-letter-color-2); }
+  .article.third p:nth-child(5)::first-letter { font-size: 100px; color: var(--first-letter-color-3); }
+  .article.fourth p:nth-child(5)::first-letter { font-size: 100px; color: var(--first-letter-color-4); }
+  .article.fifth p:nth-child(7)::first-letter { font-size: 100px; color: var(--first-letter-color-5); }
+  
+  .article.first img,
+  .article.third img,
+  .article.fifth img {
+    width: 200px;
+    height: auto;
+    float: left;
+  }
+  
+  .article.second img {
+    width: 120px;
+    height: auto;
+    float: right;
+  }
+  
+  .article.fourth img {
+    width: 200px;
+    height: auto;
+    float: right;
+  }
+  
+  .footer a {
+    text-decoration: underline !important;
+    color: inherit !important;
+  }
+  
+  .footer a:hover {
+    cursor: default;
+  }
