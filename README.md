@@ -41,5 +41,5 @@ const n = arr.length;
     return arr;
 ```
 # 5. Изображение
-![Описание изображения](https://cdn1.ozone.ru/s3/multimedia-t/6607417997.jpg)
+
 <img src="https://cdn1.ozone.ru/s3/multimedia-t/6607417997.jpg" alt="Описание изображения" width="300" />
